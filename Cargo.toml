@@ -1,0 +1,14 @@
+[package]
+name = "biomodel-base"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.94"
+hf-hub = "0.3.2"
+ort = "=2.0.0-rc.9"
+tokenizers = "0.21.0"
+
+[dev-dependencies]
+clap = { version = "4.5.23", features = ["derive"] }
+ndarray = "0.16.1"
