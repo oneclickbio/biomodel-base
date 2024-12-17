@@ -38,7 +38,11 @@ fn main() -> Result<()> {
         .with_execution_providers([CUDAExecutionProvider::default().build()])
         .commit()?;
 
-    let esm_model = ESM2Models::ESM2_T6_8M;
+    // let esm_model = ESM2Models::ESM2_T6_8M;
+    // let esm_model = ESM2Models::ESM2_T12_35M;
+    let esm_model = ESM2Models::ESM2_T30_150M;
+    // let esm_model = ESM2Models::ESM2_T33_650M;
+
     let model_path = ESM2::load_model_path(esm_model)?;
 
     let model = Session::builder()?
