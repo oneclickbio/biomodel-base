@@ -1,7 +1,6 @@
 use anyhow::{Error as E, Result};
-use biomodel_base::ESM2;
+use biomodel_base::{ESM2Models, ESM2};
 use clap::Parser;
-use hf_hub::api::sync::Api;
 use ndarray::Array2;
 use ort::{
     execution_providers::CUDAExecutionProvider,
@@ -32,15 +31,15 @@ struct Args {
 fn main() -> Result<()> {
     let args = Args::parse();
     let base_path = env::current_dir()?;
-    let api = Api::new().unwrap();
-    let repo_id = "zcpbx/esm2-t6-8m-UR50D-onnx".to_string();
-    let model_path = api.model(repo_id).get("model.onnx").unwrap();
 
     // Create the ONNX Runtime environment, enabling CUDA execution providers for all sessions created in this process.
     ort::init()
         .with_name("ESM2")
         .with_execution_providers([CUDAExecutionProvider::default().build()])
         .commit()?;
+
+    let esm_model = ESM2Models::ESM2_T6_8M;
+    let model_path = ESM2::load_model_path(esm_model)?;
 
     let model = Session::builder()?
         .with_optimization_level(GraphOptimizationLevel::Level1)?
