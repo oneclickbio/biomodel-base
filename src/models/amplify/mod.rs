@@ -23,7 +23,7 @@ use std::path::PathBuf;
 use tokenizers::Tokenizer;
 
 pub enum AMPLIFYModels {
-    AMP_150M,
+    AMP_120M,
     AMP_350M,
 }
 
@@ -40,10 +40,8 @@ impl AMPLIFY {
     pub fn load_model_path(model: AMPLIFYModels) -> Result<PathBuf> {
         let api = Api::new().unwrap();
         let repo_id = match model {
-            AMPLIFYModels::AMP_150M => "zcpbx/esm2-t6-8m-UR50D-onnx",
-            AMPLIFYModels::AMP_350M => "zcpbx/esm2-t12-35M-UR50D-onnx",
-            // ESM2Models::ESM2_T30_150M => "zcpbx/esm2-t30-150M-UR50D-onnx",
-            // ESM2Models::ESM2_T33_650M => "zcpbx/esm2-t33-650M-UR50D-onnx",
+            AMPLIFYModels::AMP_120M => "zcpbx/amplify-120M-onnx",
+            AMPLIFYModels::AMP_350M => "zcpbx/amplify-350M-onnx",
         }
         .to_string();
 
